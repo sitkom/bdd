@@ -1,0 +1,39 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Fiche index{% endblock %}
+
+{% block body %}
+    <h1>Fiche index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Date_de_naissance</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fiche in fiches %}
+            <tr>
+                <td>{{ fiche.id }}</td>
+                <td>{{ fiche.nom }}</td>
+                <td>{{ fiche.prenom }}</td>
+                <td>{{ fiche.dateDeNaissance ? fiche.dateDeNaissance|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('fiche_show', {'id': fiche.id}) }}">show</a>
+                    <a href="{{ path('fiche_edit', {'id': fiche.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('fiche_new') }}">Create new</a>
+{% endblock %}
